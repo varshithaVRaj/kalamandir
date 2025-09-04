@@ -14,7 +14,7 @@ public protocol EndPoint {
     var path: String {get}
     var method: HTTPMethod {get}
     var headers: [String: String] {get}
-    var query: [URLQueryItem] {get}
+//    var query: [URLQueryItem] {get}
     var body: Data? {get}
     
 }
@@ -38,11 +38,9 @@ public struct DefaultRequestBuilder{
     
     public init(){}
     
-    
     public func makeRequest(from endPoint: EndPoint) throws -> URLRequest {
-        
         var components = URLComponents(url: endPoint.baseURL.appendingPathComponent(endPoint.path), resolvingAgainstBaseURL: false)
-        components?.queryItems = endPoint.query.isEmpty ? nil : endPoint.query
+//        components?.queryItems = endPoint.query.isEmpty ? nil : endPoint.query
         guard let url = components?.url else { throw NetworkError.invalidURL }
         var request = URLRequest(url: url)
         request.httpMethod = endPoint.method.rawValue

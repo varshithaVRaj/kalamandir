@@ -48,9 +48,12 @@ extension ArtworkDTO{
     
     func toDomain(baseImageURL: String? = nil) -> Artwork{
         
-        if let base = baseImageURL, let id = image_id{
-            URL(string: "")
+        var url: URL? = nil
+        if let base = baseImageURL, let id = image_id {
+            url = URL(string: "\(base)/\(id)/full/843,/0/default.jpg")
         }
+        
+        return Artwork(id: id, title: title, artist: artist_display ?? "Unknown", imageURL: url)
         
     }
     
